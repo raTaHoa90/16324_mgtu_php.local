@@ -1,3 +1,6 @@
+<?php
+    include_once 'includes/WhoIsNumber.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,50 +10,25 @@
 </head>
 <body>
     <?php
-        if(isset($_GET['run'])){
-            $guess = $_GET['run'];
-            $variant = $_GET['variant'];
-
-            if($guess == $variant)
-                echo 'Поздравляею, вы угадали число!!!';
-            else
-                echo "Увы, было загадано число $guess, а не $variant";
-            echo '<br>Сервер загадал новое число, попробуйте угадать его.<br>';
-        } else 
-            echo 'Сервер загадал число, попробуйте угадать его.<br>';
-
-        $guess = rand(0, 999);
-        $guessStr = ''.$guess;
+        $guess = -100;
+        $countAttempts = RunsIsGet($_GET, $guess);
+        
+        if($countAttempts <= 0) {
+            $guess = rand(0, 999);
+            $countAttempts = 3;
+        }
 
         echo '<ul>';
-
-        echo '<li>Загаданное число <b>';
-        if($guess % 2 == 1)
-            echo 'не';
-        echo 'четное</b>';
-
-        echo '<li>Загаданное число состоит из ' . strlen($guessStr) . ' символов';
-
-        switch(strlen($guessStr)){
-            case 1: break;
-            case 2: 
-                if($guessStr[0] == $guessStr[1])
-                    echo '<li>Загаданное число явняется Число-палиндром';
-                break;
-
-            case 3:
-                if($guessStr[0] == $guessStr[2])
-                    echo '<li>Загаданное число явняется Число-палиндром';
-                break;
-
-            default: echo '<li><b style="color: red">не предусмотренное значение</b>';
-        }
+        EvenOrOdd($guess);
+        CountChars($guess);
+        HasNumberReverse($guess);
 
         echo '</ul>';
     ?>
     <hr>
     <form action="?" method="GET">
         <input type="hidden" value="<?= $guess ?>" name="guess">
+        <input type="hidden" value="<?= $countAttempts ?>" name="countAttempts">
         <table>
             <tr>
                 <td>Введите число от 0 до 999: </td>
