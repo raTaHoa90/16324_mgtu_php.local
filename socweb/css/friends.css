@@ -1,0 +1,27 @@
+
+.-frind { 
+    min-height: 120px;
+    cursor: pointer;
+
+    .img {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        clip-path: circle(50%);
+        float: left;
+        margin-right: 15px;
+
+        margin-bottom: 5px;
+    }
+
+    &:hover {
+        border: solid 1px var(--color-red);
+
+        h4{
+            color: var(--color-red);
+        }
+    }
+}

@@ -1,0 +1,221 @@
+:root {
+    --color-one: rgb(69, 87, 253);
+    --color-one-dark: rgb(49, 61, 178);
+    --color-two: rgb(148, 148, 168);
+    --color-two-light: rgb(209, 209, 230);
+    --color-red: red;
+    --color-red-dark: darkred;
+
+    --color-panel-one: #eee;
+    --color-panel-two: #ddd;
+
+    --header-height: 50px;
+    --menu-width: 80px;
+}
+
+.-grid-page{
+    min-height: 99vh;
+    display: grid;
+    grid-template-areas: 
+        ". header header header ."
+        ". menu content about ."
+        "footer footer footer footer footer";
+    grid-template-columns: auto 230px 550px 200px auto;
+    grid-template-rows: var(--header-height) auto 30px;
+    grid-gap: 10px;
+
+    &.no-r{
+        grid-template-areas: 
+            ". header header header ."
+            ". menu content content ."
+            "footer footer footer footer footer";
+    }
+}
+
+html {
+    scroll-behavior:smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+
+header {
+    height: var(--header-height);
+    margin-bottom: 10px;
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    grid-area: header;
+    background: linear-gradient(var(--color-one) 75%, var(--color-one-dark));
+    z-index: 99999;
+
+    img {
+        max-height: 100%;
+        vertical-align: top;
+        filter: invert() drop-shadow(0 0 5px white);
+    }
+
+    a:hover #logo {
+        filter: invert() drop-shadow(0 0 5px var(--color-red));
+    }
+
+    form {
+        display: inline-block;
+    }
+
+    input {
+        margin-left: 100px;
+        border-radius: 5px;
+        padding: 3px;
+        width: 300px;
+    }
+
+    input:focus {
+        outline: solid var(--color-red) 1px;
+    }
+
+    nav {
+        float: right;
+    }
+    
+    ul {
+        margin: 0;
+        
+        & > li{
+            display: inline-block;
+            position: relative;
+            
+            box-sizing: border-box;
+
+            .btn {
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+
+nav {
+    display: inline-block;
+}
+
+footer {
+    height: 30px;
+    font-size: 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    grid-area: footer;
+}
+
+#contents {
+    grid-area: content;
+}
+
+#left {
+    grid-area: menu;
+    position: sticky;
+    top: 65px;
+    height: 500px;
+}
+
+#right {
+    grid-area: about;
+    position: sticky;
+    top: 65px;
+    height: 500px;
+}
+
+.btn {
+    display: inline-block;
+    border: solid 1px gray;
+    border-radius: 5px;
+    padding: 5px;
+    background: blue;
+    color: var(--color-two);
+    cursor: pointer;
+    text-decoration: none;
+    text-wrap: nowrap;
+
+    &:hover {
+        border-color: var(--color-red);
+    }
+
+    &:disabled {
+        color: lightgray;
+        background: gray !important;
+    }
+
+    &.btn-red {
+        background: linear-gradient(var(--color-red) 10%, var(--color-red-dark) 80%);
+
+        &:hover, &:focus, &:active {
+            border-color: var(--color-two);
+            color: white;
+        }
+    }
+
+    &.btn-light {
+        background: none;
+        border: none;
+        color: var(--color-one);
+        margin: 5px;
+    }
+}
+
+a {
+    color: var(--color-two);
+    text-decoration: none;
+}
+
+.btn, a{
+    &:hover, &:focus, &:active {
+        color: var(--color-red);
+    }
+}
+
+.panel {
+    background: linear-gradient(var(--color-panel-one)50%, var(--color-panel-two) 90%);
+    border: solid 1px var(--color-one);
+    border-radius: 15px;
+    margin-top: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        
+        & > li{
+            display: block;
+            box-sizing: border-box;
+
+            .btn {
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+
+.-ta-r{
+    text-align: right;
+}
+
+.-f-r {
+    float: right;
+}
+
+.error {
+    padding: 10px;
+    background-color: rgb(255, 180, 180);
+    border: solid 1px var(--color-red-dark);
+    border-radius: 5px;
+    margin: 5px;
+}

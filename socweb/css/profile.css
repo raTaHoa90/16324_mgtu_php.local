@@ -1,0 +1,50 @@
+.avatar {
+    display: inline-block;
+    height: 180px;
+    width: 180px;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    clip-path: circle(50%);
+
+    margin-bottom: 5px;
+}
+
+.friends { 
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .avatar {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+#right p{
+    display: inline-block;
+    margin: 3px;
+}
+
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    &>* {
+        display: inline-block;
+        margin: 3px;
+    }
+}
+
+.-fotos>*{
+    width: 120px;
+    height: 120px;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}

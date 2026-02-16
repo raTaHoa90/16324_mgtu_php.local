@@ -1,0 +1,46 @@
+#room {
+    width: 100%;
+}
+
+#room .msg{
+    background: linear-gradient(180deg, #91a3ff 0%, #526fff 90%);
+    width: 90%;
+    min-height: 80px;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#room .msg small{
+    font-size: 10px;
+    float: right;
+    color: lightgray;
+}
+
+#room .msg .text {
+    margin-top: 10px;
+    color: white;
+}
+
+#room .msg.-my{
+    background: linear-gradient(180deg, #2cc709 0%, #1f8807 90%);
+}
+
+.msg .img {
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    clip-path: circle(50%);
+    float: left;
+    margin-right: 15px;
+
+    margin-bottom: 5px;
+}
+
+.form-send {
+    position: sticky;
+    bottom: 0px;
+}
