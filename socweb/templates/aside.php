@@ -1,24 +1,27 @@
+<?php
+    include_once "DATA/usersFriends.php";
+    $friends = getFriendsByUserID($user['id']);
+?>
+
 <div class="panel">
-    <div class="avatar" style="background-image: url(/img/profile.jpg)">
+    <div class="avatar" style="background-image: url(<?= $user['avatar'] ?>)">
     </div>
-    <center><b>Сергеев Д.Н.</b></center>
+    <center><b><?= $user['fio'] ?></b></center>
 </div>
 
 <div class="panel">
     <h3>Мои друзья:</h3>
     <div class="friends">
-        <a href="#f1" class="avatar" style="background-image: url(/img/frind1.png);" title="Иванов Иван Иванович"></a>
-        <a href="#f2" class="avatar" style="background-image: url(/img/frind2.avif);" title="Иванов Иван Иванович"></a>
-        <a href="#f3" class="avatar" style="background-image: url(/img/frind3.webp);" title="Иванов Иван Иванович"></a>
-        <a href="#f4" class="avatar" style="background-image: url(/img/frind4.webp);" title="Иванов Иван Иванович"></a>
-        <a href="#f5" class="avatar" style="background-image: url(/img/frind5.jpg);" title="Иванов Иван Иванович"></a>
+        <?php foreach($friends as $friend): ?>
+        <a href="/?action=friend&f_id=<?= $friend['id'] ?>" class="avatar" style="background-image: url(<?= $friend['avatar'] ?>);" title="<?= $friend['fio'] ?>"></a>
+        <?php endforeach; ?>
     </div>
 </div>
 
 <div class="panel -info">
     <table>
-        <tr><td>Город:</td><td>Москва</td></tr>
-        <tr><td>Рабора:</td><td>МГТУ</td></tr>
-        <tr><td>Телефон:</td><td><a href="tel: 89001234567">89001234567</a></td></tr>
+        <tr><td>Город:</td><td><?= $user['city'] ?></td></tr>
+        <tr><td>Рабора:</td><td><?= $user['job'] ?></td></tr>
+        <tr><td>Телефон:</td><td><a href="tel: <?= $user['tel'] ?>"><?= $user['tel'] ?></a></td></tr>
     </table>
 </div>

@@ -1,7 +1,11 @@
 <?php
-setcookie('hasAuth', '0', 1);
-setcookie('UID', 0, 1);
-header('Location: '. $_SERVER['HTTP_REFERER']);
+//setcookie('hasAuth', '0', 1);
+//setcookie('UID', 0, 1);
+include_once 'lib/session.php';
+include_once 'lib/utils.php';
+
+reStartSession();
+toBack();
 
 // HTTP_REFERER - ссылка с которой перешли на текущую
 // REQUEST_URI - по какому пути прошел пользователь

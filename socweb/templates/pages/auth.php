@@ -2,7 +2,7 @@
     <?php if(isset($error)):?>
     <div class='error'><?= $error ?></div>
     <?php endif; ?>
-    <form action="/auth.php" method="POST">
+    <form action="/POST/auth.php" method="POST">
         <table>
             <tr>
                 <td class="-ta-r">Ваш логин:</td>
