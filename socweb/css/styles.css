@@ -20,7 +20,7 @@
         ". header header header ."
         ". menu content about ."
         "footer footer footer footer footer";
-    grid-template-columns: auto 230px 550px 200px auto;
+    grid-template-columns: auto 160px 620px 200px auto;
     grid-template-rows: var(--header-height) auto 30px;
     grid-gap: 10px;
 
@@ -122,14 +122,14 @@ footer {
 #left {
     grid-area: menu;
     position: sticky;
-    top: 65px;
+    top: 60px;
     height: 500px;
 }
 
 #right {
     grid-area: about;
     position: sticky;
-    top: 65px;
+    top: 60px;
     height: 500px;
 }
 
@@ -155,6 +155,15 @@ footer {
 
     &.btn-red {
         background: linear-gradient(var(--color-red) 10%, var(--color-red-dark) 80%);
+
+        &:hover, &:focus, &:active {
+            border-color: var(--color-two);
+            color: white;
+        }
+    }
+
+    &.btn-blue {
+        background: linear-gradient(var(--color-one) 10%, var(--color-one-dark) 80%);
 
         &:hover, &:focus, &:active {
             border-color: var(--color-two);
