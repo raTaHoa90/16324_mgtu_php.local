@@ -47,7 +47,7 @@ function routeFind(array $pathes, array $routes){
         if(count($pathes) == 0)
             return $routes[$path];
     } else {
-        $varUrl = array_find(array_keys($routes), fn($value)=>strlen($value) > 1 && $value[0] = '@');
+        $varUrl = array_find(array_keys($routes), fn($value)=>strlen($value) > 1 && $value[0] == '@');
         if($varUrl){
             $_tempParams[substr($varUrl, 1)] = $path;
 

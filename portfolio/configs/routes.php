@@ -26,7 +26,12 @@ return [
     'POST' => [
         'admin' => [
             'auth' => 'admin/auth.php',
-            'profile' => 'admin/profile.php'
+            'profile' => 'admin/profile.php',
+            'catalogs' => [
+                'getCatalogs' => 'admin/catalogs.php',
+                'createDir' => 'admin/catalogs.php',
+                'uploadFile' => 'admin/catalogs.php'
+            ]
         ],
     ]
 ];

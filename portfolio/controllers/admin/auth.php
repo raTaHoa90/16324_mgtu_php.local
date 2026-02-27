@@ -1,5 +1,4 @@
 <?php
-loadModel('users');
 
 function GET_auth(){
     $data = [ 'caption' => 'Авторизация' ];
