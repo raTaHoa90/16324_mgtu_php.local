@@ -4,32 +4,6 @@
 <script>
     catalogs.userDir = '<?= $user['id'].'_catalog' ?>';
 </script>
-<style>
-    .errors{
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        & .error {
-            margin-bottom: 5px;
-            background-color: #FFA0A0;
-            border: solid 1px red;
-            border-radius: 10px;
-            padding: 10px;
-            & i {
-                float: right;
-            }
-        }
-    }
-    .file {
-        & img {
-            max-width: 64px;
-        }
-        & .file-info span{
-            font-size: x-small;
-        }
-    }
-</style>
 
 <div class='errors'></div>
 
@@ -57,6 +31,8 @@
 
 <template id="dir_templ">
     <div class='dir'>
+        <span class="btn f-t-r" href="#" onclick="catalogs.deleteDir('#=DirName=#',this.parentElement)"><i class="fa fa-trash-o"></i></span>
+
         <img src="/imgs/ext/dir.png"><br>
         <b><a href="#">NameDir</a></b>
     </div>
@@ -64,6 +40,8 @@
 
 <template id="file_templ">
     <div class='file'>
+        <span class="btn f-t-r" href="#" onclick="catalogs.deleteFile('#=FileName=#',this.parentElement)"><i class="fa fa-trash-o"></i></span>
+
         <img src="/imgs/ext/file.png"><br>
         <a href="#">NameFile.txt</a>
         <div class="file-info">
@@ -72,6 +50,8 @@
         </div>
     </div>
 </template>
+
+<section id="pathdir"></section>
 
 <section class="files">
 

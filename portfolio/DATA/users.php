@@ -61,6 +61,18 @@ function saveUserData(int $id, array $data): bool {
     return true;
 }
 
+function createUserData(array $data): bool {
+    $users = loadModel('users');
+
+    $max = array_reduce($users, fn($max, $user)=> max($max, $user['id']), 0);
+    $max++;
+
+    $data['id'] = $max;
+    $users[] = $data;
+    file_put_contents(config('app.paths.models').'/users.json', json_encode($users));
+    return true;
+}
+
 function getAllPhotos(){
     $user = AutoAuth();
     $path = 'img/photos_'.$user['id'];

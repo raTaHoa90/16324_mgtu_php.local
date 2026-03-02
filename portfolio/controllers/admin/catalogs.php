@@ -7,7 +7,7 @@ function GET_catalogs() {
         redirect('/admin/auth');
 
     view('admin/catalogs', [
-        'caption' => 'Портфолио: '.$user['fio'],
+        'caption' => 'Портфолио: '.($user['fio'] ?? $user['login']),
         'menu' => $menu,
         'user' => $user
     ]);
@@ -82,6 +82,15 @@ function POST_getCatalogs(){
             $result[] = $data;
         }
     
+    usort($result, function($a, $b){
+        if($a['type'] == $b['type'])
+            return $a['name'] <=> $b['name'];
+        elseif($a['type'] == 'dir')
+            return -1;
+        else
+            return 1;
+    });
+    
     echo json_encode($result);
 }
 
@@ -125,4 +134,43 @@ function POST_uploadFile(){
         }
 
     echo json_encode($result);
+}
+
+function delete_dir($path){
+    if(is_dir($path)){
+        $entries = scandir($path);
+        foreach($entries as $entry)
+            if($entry != '.' && $entry != '..'){
+                $fullPath = $path . '/' .  $entry;
+                if(filetype($fullPath) == 'dir')
+                    delete_dir($fullPath);
+                else
+                    unlink($fullPath);
+            }
+        rmdir($path);
+    }
+}
+
+function POST_deleteDir(){
+    $data = ajax_init_catalog();
+
+    $fullpath = $data['path'] . '/' . ($_POST['dirname'] ?? '');
+    if(!is_dir($fullpath))
+        ajax_error('такой каталог отсутствует');
+
+    delete_dir($fullpath);
+
+    echo json_encode(['ok'=>true]);
+}
+
+function POST_deleteFile(){
+    $data = ajax_init_catalog();
+
+    $fullpath = $data['path'] . '/' . ($_POST['filename'] ?? '');
+    if(!file_exists($fullpath))
+        ajax_error('такой файл отсутствует');
+
+    unlink($fullpath);
+
+    echo json_encode(['ok'=>true]);
 }

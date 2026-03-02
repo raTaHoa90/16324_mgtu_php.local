@@ -1,6 +1,7 @@
 <?php
 
 function GET_one(){
+
     view('main/one', [
         'var' => $_GET['var'] ?? 4312
     ]);

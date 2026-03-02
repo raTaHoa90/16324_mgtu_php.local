@@ -5,6 +5,7 @@ return [
         'admin' => [
             '<<default>>' => 'admin/main.php',
             'auth' => 'admin/auth.php',
+            'registration' => 'admin/registration.php',
             'logout' => 'admin/auth.php',
             'profile' => 'admin/profile.php',
             'catalogs' => 'admin/catalogs.php'
@@ -26,11 +27,14 @@ return [
     'POST' => [
         'admin' => [
             'auth' => 'admin/auth.php',
+            'registration' => 'admin/registration.php',
             'profile' => 'admin/profile.php',
             'catalogs' => [
-                'getCatalogs' => 'admin/catalogs.php',
-                'createDir' => 'admin/catalogs.php',
-                'uploadFile' => 'admin/catalogs.php'
+                'getCatalogs'=> 'admin/catalogs.php',
+                'createDir'  => 'admin/catalogs.php',
+                'uploadFile' => 'admin/catalogs.php',
+                'deleteDir'  => 'admin/catalogs.php',
+                'deleteFile' => 'admin/catalogs.php'
             ]
         ],
     ]

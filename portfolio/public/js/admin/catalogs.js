@@ -19,6 +19,7 @@ var catalogs = {
 
     loadDir: function(){
         $('.files').html('');
+        $('#pathdir').html(this.path != '' ? this.path : '/');
         $.post('/admin/catalogs/getCatalogs', {path: this.path}, req => {
             if(req.error){
                 this.addError(req.error);
@@ -49,6 +50,24 @@ var catalogs = {
             else if(req.error)
                 this.addError(req.error)
             $('#dirname').val('');
+        }, 'json');
+    },
+
+    deleteDir: function(dirname, divDir){
+        $.post('/admin/catalogs/deleteDir', {path: this.path, dirname}, req => {
+            if(req.ok)
+                divDir.remove();
+            else if(req.error)
+                this.addError(req.error);
+        }, 'json');
+    },
+
+    deleteFile: function(filename, divFile){
+        $.post('/admin/catalogs/deleteFile', {path: this.path, filename}, req => {
+            if(req.ok)
+                divFile.remove();
+            else if(req.error)
+                this.addError(req.error);
         }, 'json');
     },
 
@@ -88,18 +107,21 @@ var catalogs = {
 
     fileView: function(data){
         const
-            fullpath = '/storage/' + this.userDir + '/' + this.path + '/' + data.name;
+            fullpath = '/storage/' + this.userDir + this.path + '/' + data.name;
 
         let tmpl = file_templ.content.cloneNode(true),
-            div = tmpl.querySelector('.file'),
-            img = div.querySelector('img');
+            div = tmpl.querySelector('.file');
         
+        div.innerHTML = div.innerHTML.replace(/#=FileName=#/g, data.name);
+
+        let img = div.querySelector('img');
+
         if(EXT_PIC.includes(data.ext))
             img.src = fullpath;
         else if(EXT_DOC.includes(data.ext))
             img.src = '/imgs/ext/icon_' + data.ext + '.png';
         else if(data.ext == 'txt')
-            img.src = 'imgs/ext/icon_txt.webp';
+            img.src = '/imgs/ext/icon_txt.webp';
 
         $('a', div).html(data.name).click(e => open(fullpath, '_blank') );
 
@@ -113,6 +135,11 @@ var catalogs = {
         let tmpl = dir_templ.content.cloneNode(true),
             div = tmpl.querySelector('.dir');
         
+        if(name != '..')
+            div.innerHTML = div.innerHTML.replace(/#=DirName=#/g, name);
+        else 
+            $('span', div).remove();
+
         $('a', div).html(name).click(e => {
             if(name == '..') {
                 if(this.path == '') return;
