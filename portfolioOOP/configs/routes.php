@@ -23,6 +23,8 @@ if(SYS::$isAuth){
     Routes::post('/admin/catalogs/uploadFile', 'Admin/CatalogsController@uploadFile');
     Routes::post('/admin/catalogs/deleteDir', 'Admin/CatalogsController@deleteDir');
     Routes::post('/admin/catalogs/deleteFile', 'Admin/CatalogsController@deleteFile');
+
+    Routes::get('/admin/users', 'Admin/UsersController');
 }
 
 Routes::get('/','DefaultController');

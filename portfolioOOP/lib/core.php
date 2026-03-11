@@ -2,9 +2,11 @@
 
 namespace lib;
 
+use DATA\Users;
+
 class SYS {
     static bool $isAuth = false;
-    static $authUser = null;
+    static ?Users $authUser = null;
     static array $configs = [];
     static array $models = [];
 
@@ -21,19 +23,22 @@ class SYS {
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
+        if(config('session.is_auth', false))
+            static::AutoAuth();
+
         static::$routes = new Routes;
         (static::$routes)();
     }
 
-    function AutoAuth(){
+    static function AutoAuth(){
         if( static::$authUser === null){
-            static::$isAuth = isset($_SESSION['hasAuth']);
-            static::$authUser = static::$isAuth ? getUserByID($_SESSION['UID']) : null;
+            static::$isAuth = isset(static::$session['hasAuth']);
+            static::$authUser = static::$isAuth ? Users::getUserById(static::$session['UID']) : null;
         }
         return static::$authUser;
     }
 
-    function loadModel($name){
+    static function loadModel($name){
         if(!isset(static::$models[$name])){
             include_once config('app.paths.models','models'). "/$name.php";
             $file = file_get_contents(config('app.paths.models','models'). "/$name.json");
@@ -51,7 +56,7 @@ class SYS {
     }
 
     static function back(){
-        static::$view->back();
+        static::$view->toBack();
     }
 }
 

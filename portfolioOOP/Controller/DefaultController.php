@@ -3,7 +3,7 @@ namespace Controller;
 
 use lib\SYS;
 
-class DefaultController {
+class DefaultController extends BaseController {
     function index(){
         SYS::view('default', [
             'caption' => 'Сайт для вашего портфолио'

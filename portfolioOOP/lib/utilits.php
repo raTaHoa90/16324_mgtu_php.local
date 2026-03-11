@@ -29,3 +29,16 @@ function config(string $name, $defaultValue = null){
 
     return $configs ?? $defaultValue;
 }
+
+function getSizeFile(int &$size): string{
+    $prefix = 'bytes';
+    while ($size > 1024){
+        $size = $size / 1024;
+        $prefix = match($prefix){
+            'bytes' => 'kb',
+            'kb' => 'mb',
+            'mb' => 'gb'
+        };
+    }
+    return $prefix;
+}

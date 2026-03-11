@@ -1,8 +1,8 @@
-@extend CONTENT main
+@extend ADMIN_CONTENT admin/main_admin
 
 <script src="/js/admin/catalogs.js"></script>
 <script>
-    catalogs.userDir = '<?= $user['id'].'_catalog' ?>';
+    catalogs.userDir = '<?= $user->id.'_catalog' ?>';
 </script>
 
 <div class='errors'></div>
