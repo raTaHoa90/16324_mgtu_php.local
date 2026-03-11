@@ -15,15 +15,15 @@
             <td><?= $thisUser->login ?></td>
             <td><?= $thisUser->fio ?></td>
             <td>
-            <?php if($user->tel): ?>
-                <a href="tel:<?= $user->tel ?>"><i class="fa fa-mobile"></i> <?= $user->tel ?></a><br>
-            <?php endif; if($user->email): ?>
-                <a href="mailto:<?= $user->email ?>"><i class="fa fa-envelope-o"></i> <?= $user->email ?></a><br>
-            <?php endif; if($user->telegram): ?>
-                <a href="https://t.me/<?= substr($user->telegram, 1) ?>"><i class="fa fa-telegram"></i> <?= $user->telegram ?></a><br>
+            <?php if($thisUser->tel): ?>
+                <a href="tel:<?= $thisUser->tel ?>"><i class="fa fa-mobile"></i> <?= $thisUser->tel ?></a><br>
+            <?php endif; if($thisUser->email): ?>
+                <a href="mailto:<?= $thisUser->email ?>"><i class="fa fa-envelope-o"></i> <?= $thisUser->email ?></a><br>
+            <?php endif; if($thisUser->telegram): ?>
+                <a href="https://t.me/<?= substr($thisUser->telegram, 1) ?>"><i class="fa fa-telegram"></i> <?= $thisUser->telegram ?></a><br>
             <?php endif; ?>
             </td>
-            <td><?= $user->roleCaption() ?></td>
+            <td><?= $thisUser->roleCaption() ?></td>
         </tr>
         <?php endforeach; ?>
     </table>

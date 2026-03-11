@@ -23,6 +23,7 @@
                 </a></li>
             <?php endforeach; ?></ul>
         </nav>
+        
         <?php endif ?>
     </header>
     <div>
