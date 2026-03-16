@@ -3,8 +3,16 @@
 namespace lib;
 
 use DATA\Users;
+use lib\DB\DataBase;
+use lib\DB\DBMySqlDriver;
+use lib\DB\DBPgSqlDriver;
 
 class SYS {
+    const DB_DRIVERS = [
+        'MySQL' => DBMySqlDriver::class,
+        'PgSQL' => DBPgSqlDriver::class
+    ];
+
     static bool $isAuth = false;
     static ?Users $authUser = null;
     static array $configs = [];
@@ -13,12 +21,27 @@ class SYS {
     static ?ISession $session = null;
     static ?View $view = null;
     static ?Routes $routes = null;
+    static ?DataBase $DB = null;
 
     static $shared = [];
 
     static function Init(){
         static::$session = new SysSession;
         static::$view = new View;
+
+        $dbDriver = config('database.drive', null);
+
+        if(isset(static::DB_DRIVERS[$dbDriver])){
+            DataBase::$debug = config('app.debug');
+            
+            static::$DB = new (static::DB_DRIVERS[$dbDriver]) (
+                config('database.host'), 
+                config('database.dbname'),
+                config('database.user'),
+                config('database.password'),
+                config('database.port')
+            );
+        }
         
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");

@@ -6,5 +6,6 @@ return [
         'templates' => 'views',
         'temp' => 'temp',
         'models' => 'DATA'
-    ]
+    ],
+    'debug' => true
 ];
