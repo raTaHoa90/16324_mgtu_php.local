@@ -31,7 +31,7 @@ class AuthController extends BaseAuthController {
             SYS::redirect('/admin/auth');
         }
 
-        if($user->password != $_POST['pass']){
+        if(!$user->testPassword($_POST['pass'])){
             SYS::$session['error'] = 'Не верно указан логин или пароль';
             SYS::redirect('/admin/auth');
         }

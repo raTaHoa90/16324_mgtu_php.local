@@ -23,7 +23,7 @@ class ProfileController extends BaseAdminController {
                 SYS::$session['error'] = 'Несовпадают введеные пароли';
                 SYS::back();
             }
-            $this->user->password = $_POST['pass'];
+            $this->user->setPassword( $_POST['pass'] );
         }
 
         if(isset($_POST['login']) && !trim($_POST['login'])){
@@ -31,9 +31,11 @@ class ProfileController extends BaseAdminController {
             SYS::back();
         }
 
-        $fileds = ['login', 'fio', 'tel', 'email', 'telegram', 'desc'];
+        $fileds = ['login', 'fio', 'tel', 'email', 'telegram'];
         foreach($fileds as $filed)
             $this->user->{$filed} = $_POST[$filed];
+
+        $this->user->description = $_POST['desc'];
 
         /*
             $_FILES['document'] = [

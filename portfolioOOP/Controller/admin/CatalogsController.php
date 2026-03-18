@@ -121,7 +121,7 @@ class CatalogsController extends BaseAdminController {
                 move_uploaded_file($_FILES['upFile']['tmp_name'][$i], $fullPath);
 
                 $size = filesize($fullPath);
-                $prefix = $this->getSizeFile($size);
+                $prefix = getSizeFile($size);
 
                 $result[] = [
                     'name' => $name,

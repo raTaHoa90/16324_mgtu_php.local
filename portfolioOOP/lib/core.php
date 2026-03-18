@@ -29,7 +29,7 @@ class SYS {
         static::$session = new SysSession;
         static::$view = new View;
 
-        $dbDriver = config('database.drive', null);
+        $dbDriver = config('database.driver', null);
 
         if(isset(static::DB_DRIVERS[$dbDriver])){
             DataBase::$debug = config('app.debug');
@@ -53,10 +53,18 @@ class SYS {
         (static::$routes)();
     }
 
+    static function emailValidation($email){
+        return !!preg_match(
+            '/^([\w+-]+\.)*[\w+-]+\w@([\w-]+\.){1,3}[\w]{2,}$/i',
+            trim($email),
+            $matches
+        );
+    }
+
     static function AutoAuth(){
         if( static::$authUser === null){
             static::$isAuth = isset(static::$session['hasAuth']);
-            static::$authUser = static::$isAuth ? Users::getUserById(static::$session['UID']) : null;
+            static::$authUser = static::$isAuth ? Users::find(static::$session['UID']) : null;
         }
         return static::$authUser;
     }
@@ -99,6 +107,7 @@ spl_autoload_register(function($className){
 });
 
 include_once 'lib/utilits.php';
+require_once 'vendor/autoload.php';
 
 //include_once 'lib/session.php';
 //include_once 'lib/Routes.php';

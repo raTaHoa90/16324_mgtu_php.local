@@ -1,5 +1,6 @@
 <?php
 
+use DATA\Users;
 use lib\Routes;
 use lib\SYS;
 
@@ -24,7 +25,16 @@ if(SYS::$isAuth){
     Routes::post('/admin/catalogs/deleteDir', 'Admin/CatalogsController@deleteDir');
     Routes::post('/admin/catalogs/deleteFile', 'Admin/CatalogsController@deleteFile');
 
-    Routes::get('/admin/users', 'Admin/UsersController');
+    
+
+    if(SYS::$authUser->role == Users::ROLE_ADMIN) {
+        Routes::get('/admin/users', 'Admin/UsersController');
+
+        Routes::get('/admin/chats', 'Admin/ChatsController');
+        Routes::get('/admin/chats/@saf', 'Admin/ChatsController@chat');
+
+        Routes::any('/admin/CreateSiteMap', 'Admin/MainController@CreateSiteMap');
+    }
 }
 
 Routes::get('/','DefaultController');

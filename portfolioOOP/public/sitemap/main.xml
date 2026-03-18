@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>https://portfoliooop.16324-mgtu-php.local/sitemap/fixed.xml</loc>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://portfoliooop.16324-mgtu-php.local/sitemap/dyn.xml</loc>
+    </sitemap>
+
+</sitemapindex>

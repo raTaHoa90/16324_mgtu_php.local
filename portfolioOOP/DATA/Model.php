@@ -11,8 +11,17 @@ class Model {
 
     private bool $_is_new = false;
 
-    static function all(){
-        return static::table('SELECT * FROM '.static::getTable(). ';');
+    static function allWhere(string $where = ''): array {
+        return static::table('SELECT * FROM '.static::getTable(). ($where ? " WHERE $where" : ''));
+    }
+
+    static function count(string $where = ''): int {
+        $result = SYS::$DB->query('SELECT count(*) as count_row FROM '.static::getTable(). ($where ? " WHERE $where" : ''), []);
+        return isset($result[0]) ? $result[0]->count_row : 0;
+    }
+
+    static function all(): array {
+        return static::allWhere('');
     }
 
     static function table(string $sql, ?array $params = null){
@@ -37,6 +46,12 @@ class Model {
             : static::_class_to_table_name(static::class);
     }
 
+    static function create(array $data): static {
+        $obj = new static($data);
+        $obj->save();
+        return $obj;
+    }
+
     function save(){
         if($this->_is_new){ // INSERT
             $insert = 'INSERT INTO '.static::getTable().'(';
@@ -53,6 +68,8 @@ class Model {
             $insert .= ')';
 
             $this->id = SYS::$DB->insertGetId($insert, $values);
+            
+            $this->_is_new = false;
         } else { // UPDATE
             $update = 'UPDATE '.static::getTable().' SET ';
             $values = [];
@@ -66,6 +83,10 @@ class Model {
 
             SYS::$DB->queryClose($update, $values);
         }
+    }
+
+    function delete(){
+        SYS::$DB->queryClose('DELETE FROM '.static::getTable().' WHERE id='.$this->id, []);
     }
 
     function __construct($data = null)  // [] = создаем новую запись, null - запись загрузилась из БД

@@ -9,8 +9,11 @@ $menu = [
     ['caption' => 'Портфолио', 'icon' => 'fa-file-archive-o', 'url' => '/admin/catalogs'],
 ];
 
-if(SYS::$isAuth && SYS::$authUser->role == Users::ROLE_ADMIN)
+if(SYS::$isAuth && SYS::$authUser->role == Users::ROLE_ADMIN){
     $menu[] = ['caption' => 'Пользователи', 'icon' => 'fa-users', 'url' => '/admin/users'];
+    $menu[] = ['caption' => 'Чаты', 'icon' => 'fa-comments-o', 'url' => '/admin/chats'];
+    $menu[] = ['caption' => 'Сформировать SiteMap', 'url' => '/admin/CreateSiteMap'];
+}
 $menu[] = ['caption' => 'Выход', 'icon' => 'fa-sign-out', 'url' => '/admin/logout'];
 
 return $menu;

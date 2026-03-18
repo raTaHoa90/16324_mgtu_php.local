@@ -11,6 +11,10 @@
                 <td><input required autocomplete="off" name="login" value=""></td>
             </tr>
             <tr>
+                <td>Email:</td>
+                <td><input required type="email" autocomplete="off" name="email" value=""></td>
+            </tr>
+            <tr>
                 <td>Введите пароль:</td>
                 <td><input autocomplete="off" type="password" name="pass"></td>
             </tr>
